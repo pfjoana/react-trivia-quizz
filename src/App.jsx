@@ -89,12 +89,19 @@ export default function App() {
       { startScreen ?
       <div className="start-screen">
         <h1>A great Trivia Quizz</h1>
-        <button className="main-button" onClick={onStart}>Start</button>
+        {/* activate button only when fetch is completed */}
+        <button
+          className="main-button"
+          onClick={onStart}
+          disabled={!allQA || allQA.length === 0}
+        >Start</button>
       </div>
       :
       <div>
         {QAelements}
-        <button className="main-button" onClick={() => setCheck(true)}>Check answers</button>
+        <button className="main-button"
+          onClick={() => setCheck(true)}
+        >Check answers</button>
       </div>
       }
     </>
