@@ -7,7 +7,7 @@ import './App.css'
 export default function App() {
 
   const [startScreen, setStartScreen] = useState(true)
-  const [check, setCheck] = useState(false) // when check is true verify answer, add this later
+  const [checked, setChecked] = useState(false) // when check is true verify answer, add this later
 
   // store data from API
   const [allQA, setAllQA] = useState([])
@@ -54,7 +54,8 @@ export default function App() {
         question: decQuestion,
         answers: shuffledAnswers,
         correct_answer: decCorrectAnswer,
-        selected_answer: ""
+        selected_answer: "",
+        correct: false
       }
     });
 
@@ -78,22 +79,46 @@ export default function App() {
   }
 
   //QA elements to display
-  const QAelements = decodedQA.map(qa => (
-    <QA
-      key={qa.id}
-      id= {qa.id}
-      question={qa.question}
-      answers={qa.answers}
-      handleSelect={handleSelect}
-      selected_answer={qa.selected_answer}
-    />
-  ))
+  const QAelements = decodedQA.map((qa,index) => {
+
+    if (!qa) {
+      console.error(`Question object at index ${index} is undefined.`);
+      return null; // or some fallback UI
+   }
+    return(
+      <QA
+        key={qa.id}
+        id= {qa.id}
+        question={qa.question}
+        answers={qa.answers}
+        handleSelect={handleSelect}
+        selected_answer={qa.selected_answer}
+        checked={checked}
+        correct={qa.correct}
+      />
+    )
+    })
 
   //check answers
   function onCheck(){
-    decodedQA.map(qa => {
-      qa.selectedAnswer === qa.correct_answer ? console.log("correct") : console.log("incorrect")
-    })
+    // console.log('Before check:', decodedQA); // Log the state before the check
+
+    setChecked(true)
+
+    const checkedQA = decodedQA.map(qa => {
+      // Check if the selected answer is correct
+      const isCorrect = qa.selected_answer === qa.correct_answer;
+
+      // Return a new object with the updated 'correct' property
+      return {
+        ...qa,
+        correct: isCorrect
+      };
+   });
+
+    // console.log('After check:', checkedQA); // Log the new state after the check
+
+    setDecodedQA(checkedQA)
   }
 
 
