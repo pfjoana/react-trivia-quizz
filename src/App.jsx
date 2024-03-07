@@ -53,7 +53,8 @@ export default function App() {
         id: nanoid(),
         question: decQuestion,
         answers: shuffledAnswers,
-        correct_answer: decCorrectAnswer
+        correct_answer: decCorrectAnswer,
+        selected_answer: ""
       }
     });
 
@@ -67,11 +68,11 @@ export default function App() {
 
 
   //component calls this with arguments
-  function handleSelect(selectId, selectedAnswer){
-    // console.log("selectedAnswer:", selectedAnswer);
+  function handleSelect(selectId, selected_answer){
+    // console.log("selectedAnswer:", selected_answer);
 
     setDecodedQA(prevState => prevState.map(qa =>{
-      return qa.id === selectId ? {...qa, selectedAnswer} : qa
+      return qa.id === selectId ? {...qa, selected_answer} : qa
     }))
 
   }
@@ -84,10 +85,16 @@ export default function App() {
       question={qa.question}
       answers={qa.answers}
       handleSelect={handleSelect}
+      selected_answer={qa.selected_answer}
     />
   ))
 
-
+  //check answers
+  function onCheck(){
+    decodedQA.map(qa => {
+      qa.selectedAnswer === qa.correct_answer ? console.log("correct") : console.log("incorrect")
+    })
+  }
 
 
   return (
@@ -105,8 +112,9 @@ export default function App() {
       :
       <div>
         {QAelements}
-        <button className="main-button"
-          onClick={() => setCheck(true)}
+        <button
+        className="main-button"
+        onClick={onCheck}
         >Check answers</button>
       </div>
       }
