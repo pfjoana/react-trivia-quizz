@@ -9,10 +9,6 @@ export default function App() {
   const [startScreen, setStartScreen] = useState(true)
   const [check, setCheck] = useState(false) // when check is true verify answer, add this later
 
-  //empty QA to insert decoded data
-  // const [QA, setQA] = useState([])
-
-
   // store data from API
   const [allQA, setAllQA] = useState([])
   const [decodedQA, setDecodedQA] = useState([])
@@ -39,18 +35,18 @@ export default function App() {
    }
 
 
-  //decode and insert answer
+  //decode and join all answers together
   function onStart(){
     setStartScreen(false);
 
     const newArray = allQA.map(item => {
       //decode question and answers
       const decQuestion = he.decode(item.question);
-      const decAnswers = item.incorrect_answers.map(answer => he.decode(answer));
+      const decIncAnswers = item.incorrect_answers.map(answer => he.decode(answer));
       const decCorrectAnswer = he.decode(item.correct_answer);
 
       // all answers together
-      const AllAnswers = [...decAnswers, decCorrectAnswer];
+      const AllAnswers = [...decIncAnswers, decCorrectAnswer];
       const shuffledAnswers = shuffleArray(AllAnswers);
 
       return {
@@ -62,22 +58,32 @@ export default function App() {
     });
 
     setDecodedQA(newArray);
-
   }
 
+
   useEffect(() => {
-    // Perform actions that depend on decodeQA
     console.log(decodedQA);
    }, [decodedQA]);
 
 
+  //component calls this with arguments
+  function handleSelect(selectId, selectedAnswer){
+    // console.log("selectedAnswer:", selectedAnswer);
+
+    setDecodedQA(prevState => prevState.map(qa =>{
+      return qa.id === selectId ? {...qa, selectedAnswer} : qa
+    }))
+
+  }
 
   //QA elements to display
   const QAelements = decodedQA.map(qa => (
     <QA
       key={qa.id}
+      id= {qa.id}
       question={qa.question}
       answers={qa.answers}
+      handleSelect={handleSelect}
     />
   ))
 
