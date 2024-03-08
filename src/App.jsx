@@ -7,11 +7,7 @@ import './App.css'
 export default function App() {
 
   const [startScreen, setStartScreen] = useState(true)
-  const [check, setCheck] = useState(false) // when check is true verify answer, add this later
-
-  //empty QA to insert decoded data
-  // const [QA, setQA] = useState([])
-
+  const [checked, setChecked] = useState(false) // when check is true verify answer, add this later
 
   // store data from API
   const [allQA, setAllQA] = useState([])
@@ -39,49 +35,91 @@ export default function App() {
    }
 
 
-  //decode and insert answer
+  //decode and join all answers together
   function onStart(){
     setStartScreen(false);
 
     const newArray = allQA.map(item => {
       //decode question and answers
       const decQuestion = he.decode(item.question);
-      const decAnswers = item.incorrect_answers.map(answer => he.decode(answer));
+      const decIncAnswers = item.incorrect_answers.map(answer => he.decode(answer));
       const decCorrectAnswer = he.decode(item.correct_answer);
 
       // all answers together
-      const AllAnswers = [...decAnswers, decCorrectAnswer];
+      const AllAnswers = [...decIncAnswers, decCorrectAnswer];
       const shuffledAnswers = shuffleArray(AllAnswers);
 
       return {
         id: nanoid(),
         question: decQuestion,
         answers: shuffledAnswers,
-        correct_answer: decCorrectAnswer
+        correct_answer: decCorrectAnswer,
+        selected_answer: "",
+        correct: false
       }
     });
 
     setDecodedQA(newArray);
-
   }
 
+
   useEffect(() => {
-    // Perform actions that depend on decodeQA
     console.log(decodedQA);
    }, [decodedQA]);
 
 
+  //component calls this with arguments
+  function handleSelect(selectId, selected_answer){
+    // console.log("selectedAnswer:", selected_answer);
+
+    setDecodedQA(prevState => prevState.map(qa =>{
+      return qa.id === selectId ? {...qa, selected_answer} : qa
+    }))
+
+  }
 
   //QA elements to display
-  const QAelements = decodedQA.map(qa => (
-    <QA
-      key={qa.id}
-      question={qa.question}
-      answers={qa.answers}
-    />
-  ))
+  const QAelements = decodedQA.map((qa,index) => {
 
+    if (!qa) {
+      console.error(`Question object at index ${index} is undefined.`);
+      return null; // or some fallback UI
+   }
+    return(
+      <QA
+        key={qa.id}
+        id= {qa.id}
+        question={qa.question}
+        answers={qa.answers}
+        handleSelect={handleSelect}
+        selected_answer={qa.selected_answer}
+        checked={checked}
+        correct={qa.correct}
+      />
+    )
+    })
 
+  //check answers
+  function onCheck(){
+    // console.log('Before check:', decodedQA); // Log the state before the check
+
+    setChecked(true)
+
+    const checkedQA = decodedQA.map(qa => {
+      // Check if the selected answer is correct
+      const isCorrect = qa.selected_answer === qa.correct_answer;
+
+      // Return a new object with the updated 'correct' property
+      return {
+        ...qa,
+        correct: isCorrect
+      };
+   });
+
+    // console.log('After check:', checkedQA); // Log the new state after the check
+
+    setDecodedQA(checkedQA)
+  }
 
 
   return (
@@ -99,8 +137,9 @@ export default function App() {
       :
       <div>
         {QAelements}
-        <button className="main-button"
-          onClick={() => setCheck(true)}
+        <button
+        className="main-button"
+        onClick={onCheck}
         >Check answers</button>
       </div>
       }

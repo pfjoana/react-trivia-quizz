@@ -1,4 +1,29 @@
 * {
   margin: 0;
-  
+
 }
+
+
+/* Default styling for answers */
+.answer {
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+ }
+
+ /* Styling for the selected answer */
+ .answer-selected {
+  background-color: #dff0d8;
+ }
+
+  /* Styling for the correct answer */
+  .answer-correct {
+    background-color: #164b02;
+
+  }
+  .answer-incorrect {
+    background-color: #a41810;
+
+  }
