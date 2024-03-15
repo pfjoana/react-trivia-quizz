@@ -132,15 +132,19 @@ export default function App() {
           className="main-button"
           onClick={onStart}
           disabled={!allQA || allQA.length === 0}
-        >Start</button>
+        >
+          Start
+        </button>
       </div>
       :
       <div>
         {QAelements}
         <button
-        className="main-button"
-        onClick={onCheck}
-        >Check answers</button>
+          className="main-button"
+          onClick={onCheck}
+        >
+          Check answers
+        </button>
       </div>
       }
     </>
