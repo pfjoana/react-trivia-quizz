@@ -124,7 +124,7 @@ export default function App() {
 
 
   return (
-    <div className="main-screen" style={{backgroundImage: `url(${backgroundImg})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}>
+    <div className="main-screen" style={{backgroundImage: `url(${backgroundImg})`}}>
       { startScreen ?
       <div className="start-screen">
         <h1>A great Trivia Quizz</h1>
