@@ -3,7 +3,6 @@ import he from 'he'
 import {nanoid} from "nanoid"
 import QA from './components/QA'
 import './styles/App.scss'
-import backgroundImg from './assets/background.jpg'
 
 export default function App() {
 
@@ -124,7 +123,7 @@ export default function App() {
 
 
   return (
-    <div className="main-screen" style={{backgroundImage: `url(${backgroundImg})`}}>
+    <div className="main-screen">
       { startScreen ?
       <div className="start-screen">
         <h1>A great Trivia Quizz</h1>
