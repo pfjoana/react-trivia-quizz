@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import he from 'he'
 import {nanoid} from "nanoid"
 import QA from './components/QA'
-import './App.css'
+import './styles/App.scss'
 
 // This is a test to show a commit squash
 export default function App() {
@@ -124,17 +124,18 @@ export default function App() {
 
 
   return (
-    <>
+    <div className="main-screen">
       { startScreen ?
       <div className="start-screen">
-        <h1>A great Trivia Quizz</h1>
+        <h1>The Great Quiz</h1>
+        <p>Get ready to flex those brain muscles!<br />Let the quiz begin!...</p>
         {/* activate button only when fetch is completed */}
         <button
           className="main-button"
           onClick={onStart}
           disabled={!allQA || allQA.length === 0}
         >
-          Start
+          Start quiz
         </button>
       </div>
       :
@@ -148,6 +149,6 @@ export default function App() {
         </button>
       </div>
       }
-    </>
+    </div>
   )
 }

@@ -1,0 +1,81 @@
+@import 'variables';
+@import 'QA';
+
+* {
+  margin: 0;
+}
+
+
+body {
+background-color: black;
+}
+
+.main-screen {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  // background-color: rgb(10, 15, 43, 0.3);
+  // background-blend-mode: overlay;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(194, 194, 194, 0.3), rgba(194, 194, 194, 0.2)), url('../assets/background.jpg');
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 15, 43, 0.3);
+    z-index: 1;
+  }
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2% 4%;
+  text-align: center;
+  background-color: #f3f3f3ec;
+  z-index: 2;
+  box-shadow: $box-drop-shadow;
+  border: $text-color 1.5px solid;
+}
+
+.start-screen {
+  h1 {
+    font-family: $font-title;
+    font-size: 4rem;
+    color: $text-color;
+    margin-bottom: 22px;
+  }
+
+  p {
+    font-family: $font-text;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    color: $text-color;
+    margin-bottom: 38px;
+  }
+
+  button {
+    font-family: $font-text;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: $button-text-color;
+    background-color: $main-button-color;
+    border: none;
+    border-radius: 15px;
+    margin: auto;
+    margin-bottom: 8px;
+    padding: 5px 35px;
+    text-shadow: $button-text-shadow;
+    cursor: pointer;
+}
+}
