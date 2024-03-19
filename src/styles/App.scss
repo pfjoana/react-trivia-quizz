@@ -7,7 +7,7 @@
 
 
 body {
-background-color:  rgb(10, 15, 43);
+background-color: black;
 }
 
 .main-screen {
@@ -40,12 +40,12 @@ background-color:  rgb(10, 15, 43);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3% 6%;
+  padding: 2% 4%;
   text-align: center;
-  background-color: #f3f3f3;
+  background-color: #f3f3f3ec;
   z-index: 2;
   box-shadow: $box-drop-shadow;
-  border: $text-color 2px solid;
+  border: $text-color 1.5px solid;
 }
 
 .start-screen {
@@ -59,8 +59,9 @@ background-color:  rgb(10, 15, 43);
   p {
     font-family: $font-text;
     font-size: 1.5rem;
+    line-height: 2.2rem;
     color: $text-color;
-    margin-bottom: 40px;
+    margin-bottom: 38px;
   }
 
   button {
@@ -72,7 +73,9 @@ background-color:  rgb(10, 15, 43);
     border: none;
     border-radius: 15px;
     margin: auto;
+    margin-bottom: 8px;
     padding: 5px 35px;
     text-shadow: $button-text-shadow;
+    cursor: pointer;
 }
 }
