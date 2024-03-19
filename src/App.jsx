@@ -126,13 +126,14 @@ export default function App() {
     <div className="main-screen">
       { startScreen ?
       <div className="start-screen">
-        <h1>A great Trivia Quizz</h1>
+        <h1>The Great Quiz</h1>
+        <p>Get ready to flex those brain muscles!<br />Let the quiz begin!...</p>
         {/* activate button only when fetch is completed */}
         <button
           className="main-button"
           onClick={onStart}
           disabled={!allQA || allQA.length === 0}
-        >Start</button>
+        >Start quiz</button>
       </div>
       :
       <div>
