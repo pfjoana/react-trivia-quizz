@@ -4,6 +4,7 @@ import {nanoid} from "nanoid"
 import QA from './components/QA'
 import './App.css'
 
+// This is a test to show a commit squash
 export default function App() {
 
   const [startScreen, setStartScreen] = useState(true)
@@ -132,15 +133,19 @@ export default function App() {
           className="main-button"
           onClick={onStart}
           disabled={!allQA || allQA.length === 0}
-        >Start</button>
+        >
+          Start
+        </button>
       </div>
       :
       <div>
         {QAelements}
         <button
-        className="main-button"
-        onClick={onCheck}
-        >Check answers</button>
+          className="main-button"
+          onClick={onCheck}
+        >
+          Check answers
+        </button>
       </div>
       }
     </>
