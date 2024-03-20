@@ -139,7 +139,7 @@ export default function App() {
         </button>
       </div>
       :
-      <div>
+      <div className="QA-screen">
         {QAelements}
         <button
           className="main-button"
