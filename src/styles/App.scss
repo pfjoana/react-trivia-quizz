@@ -36,7 +36,7 @@ background-color: black;
   }
 }
 
-.start-screen {
+.start-screen, .QA-screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,9 +46,7 @@ background-color: black;
   z-index: 2;
   box-shadow: $box-drop-shadow;
   border: $text-color 1.5px solid;
-}
 
-.start-screen {
   h1 {
     font-family: $font-title;
     font-size: 4rem;
@@ -77,5 +75,8 @@ background-color: black;
     padding: 5px 35px;
     text-shadow: $button-text-shadow;
     cursor: pointer;
+  }
+
+
 }
-}
+

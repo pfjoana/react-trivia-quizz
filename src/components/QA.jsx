@@ -10,9 +10,9 @@ export default function QA ({id, question, answers, handleSelect, selected_answe
     } else {
 
       if (answer === selected_answer && correct){
-        return "answer-correct"
+        return "answer answer-correct"
       } else if (answer === selected_answer && !correct){
-        return "answer-incorrect"
+        return "answer answer-incorrect"
       } else {
         return "answer"
       }
@@ -20,7 +20,7 @@ export default function QA ({id, question, answers, handleSelect, selected_answe
   }
 
   return (
-    <div>
+    <div className="QA">
       <h3>{question}</h3>
       <ul>
         {answers.map((answer, index) => (
