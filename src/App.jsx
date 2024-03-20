@@ -124,7 +124,7 @@ export default function App() {
 
 
   return (
-    <div className="main-screen">
+    <div className="main-container">
       { startScreen ?
       <div className="start-screen">
         <h1>The Great Quiz</h1>
