@@ -42,6 +42,7 @@ background-color: black;
   z-index: 2;
   box-shadow: $box-drop-shadow;
   border: $text-color 1.5px solid;
+  padding: 2% 4%;
 }
 
 .start-screen {
@@ -88,7 +89,6 @@ button {
   overflow-x: hidden;
   height: 80vh;
   width: 50vw;
-  padding: 2% 4%;
   background-attachment: fixed;
 
   button {
