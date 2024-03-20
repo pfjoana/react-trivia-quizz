@@ -1,32 +1,32 @@
-import { useState, useEffect } from 'react'
-import he from 'he'
-import {nanoid} from "nanoid"
-import QA from './components/QA'
-import { useApi } from './useApi'
-import './styles/App.scss'
+import { useState, useEffect } from 'react';
+import he from 'he';
+import {nanoid} from "nanoid";
+import QA from './components/QA';
+import { useApi } from './useApi';
+import './styles/App.scss';
 
 export default function App() {
 
-  const [startScreen, setStartScreen] = useState(true)
-  const [checked, setChecked] = useState(false)
+  const [startScreen, setStartScreen] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   // store data from API
-  const [allQA, setAllQA] = useState([])
-  const [decodedQA, setDecodedQA] = useState([])
+  const [allQA, setAllQA] = useState([]);
+  const [decodedQA, setDecodedQA] = useState([]);
 
   //fetch data from API using custom hook useApi
   const { status, data, error } = useApi("https://opentdb.com/api.php?amount=10");
 
   useEffect(() => {
       if (status === 'fetched') {
-        console.log(data)
-        setAllQA(data.results)
+        console.log(data);
+        setAllQA(data.results);
 
       } else if (status === 'error') {
-        console.error(error)
+        console.error(error);
       }
 
-  }, [status, data, error])
+  }, [status, data, error]);
 
 
   // shuffle function with Fisher-Yates shuffle algorithm:
@@ -60,7 +60,7 @@ export default function App() {
         correct_answer: decCorrectAnswer,
         selected_answer: "",
         correct: false
-      }
+      };
     });
 
     setDecodedQA(newArray);
@@ -77,8 +77,8 @@ export default function App() {
     // console.log("selectedAnswer:", selected_answer);
 
     setDecodedQA(prevState => prevState.map(qa =>{
-      return qa.id === selectId ? {...qa, selected_answer} : qa
-    }))
+      return qa.id === selectId ? {...qa, selected_answer} : qa;
+    }));
 
   }
 
@@ -100,14 +100,14 @@ export default function App() {
         checked={checked}
         correct={qa.correct}
       />
-    )
-    })
+    );
+    });
 
   //check answers
   function onCheck(){
     // console.log('Before check:', decodedQA); // Log the state before the check
 
-    setChecked(true)
+    setChecked(true);
 
     const checkedQA = decodedQA.map(qa => {
       // Check if the selected answer is correct
@@ -122,7 +122,7 @@ export default function App() {
 
     // console.log('After check:', checkedQA); // Log the new state after the check
 
-    setDecodedQA(checkedQA)
+    setDecodedQA(checkedQA);
   }
 
 
@@ -153,5 +153,5 @@ export default function App() {
       </div>
       }
     </div>
-  )
+  );
 }
