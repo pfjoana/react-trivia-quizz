@@ -2,29 +2,32 @@ import { useState, useEffect } from 'react'
 import he from 'he'
 import {nanoid} from "nanoid"
 import QA from './components/QA'
+import { useApi } from './useApi'
 import './styles/App.scss'
 
-// This is a test to show a commit squash
 export default function App() {
 
   const [startScreen, setStartScreen] = useState(true)
-  const [checked, setChecked] = useState(false) // when check is true verify answer, add this later
+  const [checked, setChecked] = useState(false)
 
   // store data from API
   const [allQA, setAllQA] = useState([])
   const [decodedQA, setDecodedQA] = useState([])
 
+  //fetch data from API using custom hook useApi
+  const { status, data, error } = useApi("https://opentdb.com/api.php?amount=10");
 
-  // fetch data and save it to state allQA
-  useEffect(()=> {
-    async function fetchData() {
-      const response = await fetch("https://opentdb.com/api.php?amount=10");
-      const data = await response.json();
-      setAllQA(data.results);
-    }
-    fetchData();
-    console.log("fetch done")
-  }, [])
+  useEffect(() => {
+      if (status === 'fetched') {
+        console.log(data)
+        setAllQA(data.results)
+
+      } else if (status === 'error') {
+        console.error(error)
+      }
+
+  }, [status, data, error])
+
 
   // shuffle function with Fisher-Yates shuffle algorithm:
   function shuffleArray(array) {
@@ -124,7 +127,7 @@ export default function App() {
 
 
   return (
-    <div className="main-screen">
+    <div className="main-container">
       { startScreen ?
       <div className="start-screen">
         <h1>The Great Quiz</h1>

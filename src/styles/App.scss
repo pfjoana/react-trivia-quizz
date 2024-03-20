@@ -10,15 +10,13 @@ body {
 background-color: black;
 }
 
-.main-screen {
+.main-container {
   position: relative;
   overflow: hidden;
   height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  // background-color: rgb(10, 15, 43, 0.3);
-  // background-blend-mode: overlay;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,16 +34,20 @@ background-color: black;
   }
 }
 
+
 .start-screen, .QA-screen {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 2% 4%;
-  text-align: center;
   background-color: #f3f3f3ec;
   z-index: 2;
   box-shadow: $box-drop-shadow;
   border: $text-color 1.5px solid;
+  padding: 2% 4%;
+}
+
+.start-screen {
+  justify-content: center;
+  text-align: center;
 
   h1 {
     font-family: $font-title;
@@ -61,22 +63,35 @@ background-color: black;
     color: $text-color;
     margin-bottom: 38px;
   }
-
-  button {
-    font-family: $font-text;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: $button-text-color;
-    background-color: $main-button-color;
-    border: none;
-    border-radius: 15px;
-    margin: auto;
-    margin-bottom: 8px;
-    padding: 5px 35px;
-    text-shadow: $button-text-shadow;
-    cursor: pointer;
-  }
-
-
 }
 
+button {
+  font-family: $font-text;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: $button-text-color;
+  background-color: $main-button-color;
+  border: none;
+  border-radius: 15px;
+  margin: auto;
+  margin-bottom: 8px;
+  padding: 5px 35px;
+  text-shadow: $button-text-shadow;
+  cursor: pointer;
+}
+
+
+.QA-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 80vh;
+  width: 50vw;
+  background-attachment: fixed;
+
+  button {
+    margin-top: 5%;
+  }
+ }
