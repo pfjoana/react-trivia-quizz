@@ -1,4 +1,4 @@
-.QA{
+.QA {
   width: 50vw;
   font-family: $QA-text;
   color: $text-color;
@@ -11,7 +11,9 @@
   text-align: left;
   margin-left: 10px;
   margin-bottom: 16px;
-  }
+  font-weight:500;
+  font-size:1.3em;
+}
 
   ul {
     display: flex;
@@ -22,6 +24,7 @@
     list-style: none;
     padding: 10px 16px;
     margin: 5px 10px;
+    font-size: 1.1em;
   }
 }
 
