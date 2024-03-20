@@ -5,19 +5,19 @@ export default function QA ({id, question, answers, handleSelect, selected_answe
   const class_name = (answer) => {
 
     if (!checked){
-      return answer === selected_answer ? "answer-selected" : "answer"
+      return answer === selected_answer ? "answer-selected" : "answer";
 
     } else {
 
       if (answer === selected_answer && correct){
-        return "answer answer-correct"
+        return "answer answer-correct";
       } else if (answer === selected_answer && !correct){
-        return "answer answer-incorrect"
+        return "answer answer-incorrect";
       } else {
-        return "answer"
+        return "answer";
       }
     }
-  }
+  };
 
   return (
     <div className="QA">
@@ -33,5 +33,5 @@ export default function QA ({id, question, answers, handleSelect, selected_answe
         ))}
       </ul>
     </div>
-  )
+  );
 }
