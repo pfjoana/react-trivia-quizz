@@ -1,25 +1,24 @@
 /* eslint-disable react/prop-types */
 
 export default function QA ({id, question, answers, handleSelect, selected_answer, checked, correct, correct_answer}) {
-  //function to determine class name
-  const class_name = (answer) => {
+  function className(answer) {
 
     if (!checked){
-      return answer === selected_answer ? "answer answer-selected" : "answer";
+      return answer === selected_answer ? "answer-selected" : "answer";
 
     } else {
 
       if (answer === selected_answer && correct){
-        return "answer correct";
+        return "correct";
       } else if (answer === selected_answer && !correct){
-        return "answer incorrect";
+        return "incorrect";
       } else if (answer === correct_answer) {
-        return "answer correct-answer";
+        return "correct-answer";
       } else {
-        return "answer";
+        return "answer-checked";
       }
     }
-  };
+  }
 
   return (
     <div className="QA">
@@ -28,7 +27,7 @@ export default function QA ({id, question, answers, handleSelect, selected_answe
         {answers.map((answer, index) => (
           <li
           key={index}
-          className={class_name(answer)}
+          className={className(answer)}
           onClick={ ()=> handleSelect(id, answer) }
           >{answer}
           </li>

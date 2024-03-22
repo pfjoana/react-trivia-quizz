@@ -28,8 +28,8 @@
 }
 
 /* Default styling for answers */
-.answer {
-  cursor: pointer;
+
+@mixin answer-styles {
   text-align: center;
   padding: 10px;
   margin: 5px 0;
@@ -37,21 +37,38 @@
   border-radius: 8px;
  }
 
- /* Styling for the selected and checked answers */
+ .answer {
+  @include answer-styles;
+  cursor: pointer;
+ }
+
  .answer-selected {
+  @include answer-styles;
   background-color: rgba(8, 86, 201, 0.27);
  }
 
 .correct-answer {
+  @include answer-styles;
   border: 2px solid $answer-correct-color;
+  cursor: default;
 }
+
+.answer-checked {
+  @include answer-styles;
+  cursor: default;
+}
+
 .correct {
+  @include answer-styles;
   background-color: $answer-correct-color;
   border: 2px solid $answer-correct-color;
   color: #e5eee6;
   font-weight: 600;
+  cursor: default;
 }
 .incorrect {
+  @include answer-styles;
   background-color: $answer-incorrect-color;
   border: 2px solid $answer-incorrect-color-border;
+  cursor: default;
 }
