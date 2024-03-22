@@ -1,7 +1,7 @@
-// useApi.js
 import { useEffect, useReducer } from 'react';
 
-export const useApi = (api) => {
+
+export const useApi = (api, uniqueId) => {
  const initialState = {
     status: 'idle',
     error: null,
@@ -34,7 +34,7 @@ export const useApi = (api) => {
         try {
           const res = await fetch(api);
           const data = await res.json();
-          localStorage.setItem(api, JSON.stringify(data));
+          localStorage.setItem(`${api}&uniqueId=${uniqueId}`, JSON.stringify(data));
           if (revokeRequest) return;
           dispatch({ type: 'FETCHED', payload: data });
         } catch (error) {
@@ -48,7 +48,7 @@ export const useApi = (api) => {
     return function cleanup() {
       revokeRequest = true;
     };
- }, [api]);
+ }, [api, uniqueId]);
 
  return state;
 };

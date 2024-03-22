@@ -3,11 +3,14 @@
 
 // Colors
 $text-color: #072E68;
-$lines-color: #072e6830;
+$lines-color: rgba(7, 46, 104, 0.18);
 $background-box-color: #ECF6FA;
 $main-button-color: #C86F4E;
 $button-text-color: #FFF7F4;
-$answer-selected-color: rgba(8, 66, 201, 0.27);
+$answer-selected-color: rgba(8, 86, 201, 0.27);
+$answer-correct-color: #0F8A1C;
+$answer-incorrect-color: rgba(201, 8, 8, 0.27);
+$answer-incorrect-color-border: rgba(201, 8, 8);
 
 
 // Typography
