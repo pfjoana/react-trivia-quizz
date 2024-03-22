@@ -14,8 +14,9 @@ export default function App() {
   const [allQA, setAllQA] = useState([]);
   const [decodedQA, setDecodedQA] = useState([]);
 
-  //fetch data from API using custom hook useApi
-  const { status, data, error } = useApi("https://opentdb.com/api.php?amount=10");
+  //fetch data from API using custom hook useApi and a uniqueId to make sure new data is fetched
+  const [uniqueId, setUniqueId] = useState(Date.now());
+  const { status, data, error } = useApi("https://opentdb.com/api.php?amount=10", uniqueId);
 
 
   useEffect(() => {
@@ -28,7 +29,6 @@ export default function App() {
       }
 
   }, [status, data, error, allQA]);
-
 
   // shuffle function with Fisher-Yates shuffle algorithm:
   function shuffleArray(array) {
@@ -113,7 +113,13 @@ export default function App() {
 
   //start over
   function onStartOver(){
-    localStorage.removeItem("https://opentdb.com/api.php?amount=10");
+    //remove older link from localStorage
+    localStorage.removeItem(`https://opentdb.com/api.php?amount=10&uniqueId=${uniqueId}`);
+
+    //create new id to trigger the fetch of new data in useApi
+    const newUniqueId = Date.now();
+    setUniqueId(newUniqueId);
+
 
     setAllQA([]);
     setDecodedQA([]);
@@ -121,6 +127,7 @@ export default function App() {
     setStartScreen(true);
   }
 
+  useEffect(() => {console.log(allQA);}, [allQA]);
 
   return (
     <div className="main-container">
