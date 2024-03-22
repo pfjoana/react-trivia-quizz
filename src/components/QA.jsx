@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
 
-export default function QA ({id, question, answers, handleSelect, selected_answer, checked, correct}) {
+export default function QA ({id, question, answers, handleSelect, selected_answer, checked, correct, correct_answer}) {
   //function to determine class name
   const class_name = (answer) => {
 
     if (!checked){
-      return answer === selected_answer ? "answer-selected" : "answer";
+      return answer === selected_answer ? "answer answer-selected" : "answer";
 
     } else {
 
       if (answer === selected_answer && correct){
-        return "answer answer-correct";
+        return "answer correct";
       } else if (answer === selected_answer && !correct){
-        return "answer answer-incorrect";
+        return "answer incorrect";
+      } else if (answer === correct_answer) {
+        return "answer correct-answer";
       } else {
         return "answer";
       }

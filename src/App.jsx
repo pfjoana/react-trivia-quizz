@@ -99,6 +99,7 @@ export default function App() {
         selected_answer={qa.selected_answer}
         checked={checked}
         correct={qa.correct}
+        correct_answer={qa.correct_answer}
       />
     );
     });
