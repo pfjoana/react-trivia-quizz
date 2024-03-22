@@ -17,6 +17,7 @@ export default function App() {
   //fetch data from API using custom hook useApi
   const { status, data, error } = useApi("https://opentdb.com/api.php?amount=10");
 
+
   useEffect(() => {
       if (status === 'fetched') {
         console.log(data);
@@ -26,7 +27,7 @@ export default function App() {
         console.error(error);
       }
 
-  }, [status, data, error]);
+  }, [status, data, error, allQA]);
 
 
   // shuffle function with Fisher-Yates shuffle algorithm:
@@ -66,29 +67,18 @@ export default function App() {
     setDecodedQA(newArray);
   }
 
-
-  useEffect(() => {
-    console.log(decodedQA);
-   }, [decodedQA]);
-
-
   //component calls this with arguments
   function handleSelect(selectId, selected_answer){
-    // console.log("selectedAnswer:", selected_answer);
-
+    if (!checked) {
     setDecodedQA(prevState => prevState.map(qa =>{
       return qa.id === selectId ? {...qa, selected_answer} : qa;
     }));
-
+    }
   }
 
   //QA elements to display
-  const QAelements = decodedQA.map((qa,index) => {
+  const QAelements = decodedQA.map((qa) => {
 
-    if (!qa) {
-      console.error(`Question object at index ${index} is undefined.`);
-      return null; // or some fallback UI
-   }
     return(
       <QA
         key={qa.id}
@@ -106,10 +96,7 @@ export default function App() {
 
   //check answers
   function onCheck(){
-    // console.log('Before check:', decodedQA); // Log the state before the check
-
     setChecked(true);
-
     const checkedQA = decodedQA.map(qa => {
       // Check if the selected answer is correct
       const isCorrect = qa.selected_answer === qa.correct_answer;
@@ -121,9 +108,17 @@ export default function App() {
       };
    });
 
-    // console.log('After check:', checkedQA); // Log the new state after the check
-
     setDecodedQA(checkedQA);
+  }
+
+  //start over
+  function onStartOver(){
+    localStorage.removeItem("https://opentdb.com/api.php?amount=10");
+
+    setAllQA([]);
+    setDecodedQA([]);
+    setChecked(false);
+    setStartScreen(true);
   }
 
 
@@ -133,7 +128,6 @@ export default function App() {
       <div className="start-screen">
         <h1>The Great Quiz</h1>
         <p>Get ready to flex those brain muscles!<br />Let the quiz begin!...</p>
-        {/* activate button only when fetch is completed */}
         <button
           className="main-button"
           onClick={onStart}
@@ -147,9 +141,15 @@ export default function App() {
         {QAelements}
         <button
           className="main-button"
-          onClick={onCheck}
+          onClick={() => {
+            if(!checked){
+              onCheck();
+            } else {
+              onStartOver();
+            }
+          }}
         >
-          Check answers
+          {!checked ? "Check answers" : "Play again"}
         </button>
       </div>
       }
